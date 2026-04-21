@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Domains\Order\Services;
 
+use App\Jobs\ProcessOrderShipment;
+use App\Models\OrderItem;
 use Domains\Order\Repositories\OrderRepositoryInterface;
-use Illuminate\Support\Facades\Cache;
 use Domains\Product\Repositories\ProductRepositoryInterface;
 use Domains\Customer\Repositories\CustomerRepositoryInterface;
 use Domains\Order\DTO\OrderDTO;
-use App\Models\OrderItem;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class OrderService
@@ -82,9 +83,14 @@ class OrderService
 
     public function confirm(int $orderId): OrderDTO
     {
-        return $this->changeStatus($orderId, 'confirmed', function ($order) {
+        $dto = $this->changeStatus($orderId, 'confirmed', function ($order) {
             $order->confirmed_at = now();
         });
+
+        // отправляем в очередь
+        ProcessOrderShipment::dispatch($dto->id);
+
+        return $dto;
     }
 
     public function cancel(int $orderId): OrderDTO

@@ -78,6 +78,20 @@ services:
     networks:
       - app-network
 
+  queue:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: ekapak_queue
+    command: php artisan queue:work --tries=3
+    depends_on:
+      - app
+      - redis
+    volumes:
+      - ./:/var/www
+    networks:
+      - app-network
+
 volumes:
   db_data:
   db_test_data:
