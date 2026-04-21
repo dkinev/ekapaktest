@@ -172,8 +172,8 @@ CreateOrderRequest
 
 1. Клонирование
 ```
-   git clone <repo>
-   cd <repo>
+   git clone git@github.com:dkinev/ekapaktest.git
+   cd ekapaktest
 ```   
 2. Запуск Docker
 ```
@@ -186,7 +186,6 @@ CreateOrderRequest
 4. Настройка окружения
 ```
    cp .env.example .env
-   cp .env.example .env.testing
 ```
 5. Генерация ключа
 ```
@@ -213,12 +212,23 @@ CreateOrderRequest
 --
 
 ##   🧪 Запуск тестов
+**Php Unit**:
 ```
    docker exec app php artisan test
 ```
 или 
 ```
    docker-compose exec app php artisan test
+```
+
+**Stan**:
+```
+    composer stan
+```
+
+**Code style**:
+```
+    composer cs
 ```
 
 ---
