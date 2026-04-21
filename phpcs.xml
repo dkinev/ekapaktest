@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<ruleset name="App Coding Standard">
+
+    <description>Custom coding standard for project</description>
+
+    <!-- Проверяем -->
+    <file>app</file>
+    <file>Domains</file>
+
+    <!-- Базовый стандарт -->
+    <rule ref="PSR12"/>
+
+    <!-- Игнор -->
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>tests/*</exclude-pattern>
+    <exclude-pattern>docker/*</exclude-pattern>
+
+</ruleset>

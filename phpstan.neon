@@ -1,0 +1,13 @@
+parameters:
+    level: 1
+
+    paths:
+        - app
+        - Domains
+        - tests
+
+    ignoreErrors:
+        - '#Call to an undefined method Smarty::#'
+        - '#Access to an undefined property Smarty::#'
+
+    checkMissingIterableValueType: false
